@@ -15,7 +15,7 @@ docker-vuejs is the project you want to create Vue.js apps using Docker.
 ## Usage
 
 Use the Makefile to build the node:vuejs docker image, then to create your Vue.js app.  
-A second Makefile (the one at `build/Makefile`) will be copied to your new project, allowing you to start a development environment with Docker to use your Vue.js app.
+A second Makefile (the `build/Makefile` one) will be copied to your new project, allowing you to start a development environment with Docker to use your Vue.js app.
 
 ## Make rules available
 
@@ -26,6 +26,19 @@ make init       :    Creates your Vue.js app, letting you choose your settings, 
 
 make prepare    :    Equivalent to make build, then make init
 ```
+
+**Notice:** To avoid Git repos conflicts between docker-vuejs and your projects, the Vue.js project will be created in the parent directory of docker-vuejs.  
+To change this default setting during the Vue.js project creation, you can use the following commands:  
+
+```text
+make init PATH=path/to/new/project/directory
+
+or
+
+make prepare PATH=path/to/new/project/directory
+```  
+
+***WARNING:*** PATH must be an absolute path!
 
 ## Docker image
 

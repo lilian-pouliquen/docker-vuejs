@@ -1,5 +1,6 @@
 # VARIABLES
-APP = vuejs-app
+APP      =    vuejs-app
+PATH     =    ${PWD}/../
 
 # RULES
 ## DEFAULT RULE
@@ -15,8 +16,14 @@ help:
 	@echo "    build      :    Builds the Docker image for Vue.js"
 	@echo ""
 	@echo "    init       :    Creates your Vue.js app, letting you choose your settings, then copies the build/Makefile inside your new app"
+	@echo "                    USAGES:"
+	@echo "                        make init            => Project name: vuejs-app"
+	@echo "                        make init APP=my_app => Project name: my_app"
 	@echo ""
 	@echo "    prepare    :    Equivalent to make build, then make init"
+	@echo "                    USAGES:"
+	@echo "                        make prepare            => Project name: vuejs-app"
+	@echo "                        make prepare APP=my_app => Project name: my_app"
 	@echo ""
 
 ## PROJECT
@@ -24,7 +31,7 @@ build: ./build/Dockerfile
 	docker image build --no-cache --file ./build/Dockerfile --tag node:vuejs ./build
 
 init:
-	docker run --rm --interactive --tty --user 1000:1000 --volume "${PWD}/:/app/" node:vuejs vue create $(APP)
-	cp ./build/Makefile ./$(APP)
+	docker run --rm --interactive --tty --user 1000:1000 --volume "$(PATH):/app/" node:vuejs vue create $(APP)
+	cp ./build/Makefile $(PATH)/$(APP)/
 
 prepare: build init
