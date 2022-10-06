@@ -27,11 +27,11 @@ help:
 	@echo ""
 
 ## PROJECT
-build: ./build/Dockerfile
-	docker image build --no-cache --file ./build/Dockerfile --tag node:vuejs ./build
+build:
+	/usr/bin/docker image build --no-cache --file ./build-docker/Dockerfile --tag node:vuejs ./build-docker/
 
 init:
-	docker run --rm --interactive --tty --user 1000:1000 --volume "$(PATH):/app/" node:vuejs vue create $(APP)
+	/usr/bin/docker run --rm --interactive --tty --user 1000:1000 --volume "$(PATH):/app/" node:vuejs vue create $(APP)
 	cp ./build/Makefile $(PATH)/$(APP)/
 
 prepare: build init
